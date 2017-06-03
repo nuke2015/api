@@ -1,0 +1,11 @@
+
+自由调用,举个例子:
+<?php
+
+use \nuke2015\api\base;
+
+var_dump(base\CacheDir::get('fs'));
+base\CacheDir::set('fs',time());
+var_dump(base\CacheDir::get('fs'));
+exit;        
+
