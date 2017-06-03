@@ -1,6 +1,5 @@
 {
     "name": "nuke2015/api",
-    "description": "tp5 api by nuke2015",
     "description": "a library for api extend from thinkphp5 by fengfeng!",
     "keywords": ["thinkphp5", "redis", "api", "library"],
     "homepage": "https://github.com/facebook/php-webdriver",
