@@ -2,7 +2,7 @@
     "name": "nuke2015/api",
     "description": "a library for api extend from thinkphp5 by fengfeng!",
     "keywords": ["thinkphp5", "redis", "api", "library"],
-    "homepage": "https://github.com/facebook/php-webdriver",
+    "homepage": "https://github.com/nuke2015/api",
     "type": "library",
     "license": "Apache-2.0",
     "require": {
