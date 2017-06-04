@@ -4,6 +4,8 @@ define('MODULE_NAME', 'ExampleFeng');
 
 // 加载thinkphp5框架引导文件
 require_once '../vendor/topthink/framework/base.php';
+// composer
+require_once '../vendor/autoload.php';
 
 $config = [
 
