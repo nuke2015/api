@@ -7,7 +7,7 @@
     "license": "Apache-2.0",
     "require": {
         "php": "^5.5 || ~7.0",
-        "topthink/framework": "^5.0"
+        "topthink/framework": "5.0.9"
     },
     "autoload": {
         "psr-4": {
