@@ -1,26 +1,21 @@
 <?php
 namespace nuke2015\api\base;
 
-use think\Cache;
-use think\Config;
-
 // 单机计数器(文件存储),相关操作示例
 class CacheCount
 {
 
     public static function set($key, $value)
     {
-        $cache = self::connect();
         $value = intval($value);
-        $key   = base64_encode($key);
-        return $cache->set($key, $value, 86400);
+        $key   = self::key_modify($key);
+        return CacheRedis::set($key, $value, 86400);
     }
 
     public static function get($key)
     {
-        $cache = self::connect();
-        $key   = base64_encode($key);
-        $value = $cache->get($key);
+        $key   = self::key_modify($key);
+        $value = CacheRedis::get($key);
         return intval($value);
     }
 
@@ -33,24 +28,14 @@ class CacheCount
 
     public static function remove($key)
     {
-        $cache = self::connect();
-        $key   = base64_encode($key);
-        return $cache->rm($key);
+        $key   = self::key_modify($key);
+        return CacheRedis::remove($key);
     }
 
-    public static function clear()
+    // 修饰
+    public static function key_modify($key)
     {
-        $cache = self::connect();
-        return $cache->clear();
+        return 'base_CacheCount' . md5($key);
     }
 
-    public static function connect()
-    {
-        $options = Config::get('MyCacheCount');
-        if (isset($options['path'])) {
-            $options['path'] = CACHE_PATH . date("Ymd") . '/';
-        }
-        $cache = Cache::connect($options);
-        return $cache;
-    }
 }

@@ -20,5 +20,4 @@ var_dump(base\CacheCount::get($key_test));
 // 测试删除与清空
 base\CacheCount::remove($key_test);
 var_dump(base\CacheCount::get($key_test));
-base\CacheCount::clear();
 base\CacheCount::set('fengsu2', 2017);
