@@ -12,12 +12,14 @@ class CacheCount
     {
         $cache = self::connect();
         $value = intval($value);
+        $key   = base64_encode($key);
         return $cache->set($key, $value, 86400);
     }
 
     public static function get($key)
     {
         $cache = self::connect();
+        $key   = base64_encode($key);
         $value = $cache->get($key);
         return intval($value);
     }
@@ -32,6 +34,7 @@ class CacheCount
     public static function remove($key)
     {
         $cache = self::connect();
+        $key   = base64_encode($key);
         return $cache->rm($key);
     }
 
@@ -45,8 +48,6 @@ class CacheCount
     {
         $options = Config::get('MyCacheCount');
         if (isset($options['path'])) {
-            $options['path'] .= date("Ymd") . '/';
-        } else {
             $options['path'] = CACHE_PATH . date("Ymd") . '/';
         }
         $cache = Cache::connect($options);
