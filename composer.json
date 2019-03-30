@@ -12,7 +12,9 @@
     },
     "autoload": {
         "psr-4": {
-            "nuke2015\\api\\base\\": "src/base/"
+            "nuke2015\\api\\base\\": "src/base/",
+            "nuke2015\\api\\org\\": "src/org/",
+            "nuke2015\\api\\service\\": "src/service/"
         }
     }
 }
