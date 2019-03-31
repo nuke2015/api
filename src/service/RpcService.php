@@ -40,9 +40,14 @@ class RpcService
             'base_uri' => $host,
             'timeout'  => 2.0,
         ]);
+
+        // rpc注入
+        $data['_sign_rpc'] = $sign;
+
         $response = $client->request('POST', $host, [
-            'form_params' => ['_sign_rpc' => $sign, 'package' => $data],
+            'form_params' => $data,
         ]);
+
         $result = '';
         $code   = $response->getStatusCode(); // 200
         // var_dump($code);exit;
@@ -73,7 +78,7 @@ class RpcService
                 // 限制十分钟内
                 $result = [-3, 'sign_rpc expire!'];
             } else {
-                $result = [0, 'sign is ok'];
+                $result = [0, $_REQUEST];
             }
         }
         return $result;

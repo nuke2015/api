@@ -3,7 +3,7 @@ require 'config.php';
 
 use \nuke2015\api\service;
 
-$host  = 'http://10.0.17.103';
+$host  = 'http://127.0.0.100/deploy/Demo.php?c=1273b3093395ab6ef9b80b312f10f7d0';
 $topic = 'zhihu';
 $key   = 'hello world';
 $rpc   = new service\RpcService($topic, $key);
