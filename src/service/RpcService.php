@@ -41,22 +41,24 @@ class RpcService
             'timeout'  => 2.0,
         ]);
         $response = $client->request('POST', $host, [
-            'form_params' => ['sign_rpc' => $sign, 'package' => $data],
+            'form_params' => ['_sign_rpc' => $sign, 'package' => $data],
         ]);
         $result = '';
         $code   = $response->getStatusCode(); // 200
+        // var_dump($code);exit;
         if ($code == 200) {
             $body   = $response->getBody();
             $result = $body->getContents();
+            // var_dump($body, $result);exit;
         }
 
         return [$code, $result];
     }
 
     // 先校验签名才回复数据
-    public function result($data)
+    public function check()
     {
-        $sign_rpc             = trim($_REQUEST['sign_rpc']);
+        $sign_rpc             = trim($_REQUEST['_sign_rpc']);
         list($rnd, $sign_may) = explode('_', $sign_rpc);
         if (!$rnd || !$sign_may) {
             // 无签名
@@ -71,11 +73,10 @@ class RpcService
                 // 限制十分钟内
                 $result = [-3, 'sign_rpc expire!'];
             } else {
-                $result = [0, $data];
+                $result = [0, 'sign is ok'];
             }
         }
-        echo json_encode($result);
-        return;
+        return $result;
     }
 
     // 签名
