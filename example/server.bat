@@ -1,1 +1,1 @@
-php -S 127.0.0.100:80 index.php
+D:\advance\php\php74\php.exe -S 127.0.0.100:80 index.php
