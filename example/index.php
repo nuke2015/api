@@ -7,9 +7,7 @@ define('CUBE_MODULE', 'cube_demo');
 
 define('CUBE_PATH', dirname(dirname(__DIR__)));
 
-require "config.php";
-
-require "bootstrap.php";
+require "autoload.php";
 
 $c       = isset($_GET['c']) ? trim($_GET['c']) : '';
 $app_dir = __DIR__ . '/app/';

@@ -1,10 +1,5 @@
 <?php
 
-// 加载thinkphp5框架引导文件
-require_once dirname(__DIR__) . '/vendor/topthink/framework/base.php';
-// composer
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-
 // 此config仅适用于当前的demo
 $myconfig = [
 
