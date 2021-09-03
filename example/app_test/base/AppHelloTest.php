@@ -1,8 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+use nuke2015\api\base;
 
-class AppHelloTest extends TestCase
+class AppHelloTest extends base\TestCase
 {
     public function testindex()
     {
