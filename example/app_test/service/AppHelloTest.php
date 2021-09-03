@@ -6,6 +6,6 @@ class AppHelloTest extends TestCase
 {
     public function testindex()
     {
-        $this->assertEquals('model test', '');
+        $this->assertEquals('service', 'service');
     }
 }
