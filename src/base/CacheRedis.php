@@ -42,16 +42,27 @@ class CacheRedis extends MyRedis
         return $status;
     }
 
+    // 剩余时间
+    public static function ttl($key)
+    {
+        $key   = self::modify_key($key);
+        $redis = self::conn();
+        $ttl   = $redis->ttl($key);
+        return $ttl;
+    }
+
     // 自增锁,因为不能serialize,所以,与其它的get,set操作不能共用!
     public static function setinc($key, $value, $expire = 86400)
     {
-        $check = self::isExists($key);
-        if ($check) {
-            $n=self::get($key);
-            self::set($key,$n+$value);
+
+        $n = intval(self::get($key));
+        if (!$n) {
+            self::set($key, $value, $expire);
         } else {
-            self::set($key, $value);
+            $ttl = self::ttl($key);
+            self::set($key, $n + $value, $ttl);
         }
+
         return self::get($key);
     }
 
