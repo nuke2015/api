@@ -24,9 +24,7 @@ class RpcService
     public function send($host, $param)
     {
         $rnd               = time();
-        $sign              = $this->md5($this->topic, $this->key);
-        $sign              = $this->md5($sign, $rnd);
-        $sign              = $rnd . '_' . $sign;
+        $sign              = $this->get_sign($rnd);
         list($code, $data) = $this->guzzle($host, $param, $sign);
         if ($code == 200) {
             return json_decode($data, 1);
@@ -69,9 +67,8 @@ class RpcService
             // 无签名
             $result = [-1, 'sign_rpc empty!'];
         } else {
-            $sign = $this->md5($this->topic, $this->key);
-            $sign = $this->md5($sign, $rnd);
-            if (!$sign_may || $sign != $sign_may) {
+            $sign_true = $this->get_sign($rnd);
+            if (!$sign_rpc || $sign_true != $sign_rpc) {
                 // 签名错误
                 $result = [-2, 'sign_rpc fail!'];
             } elseif ($rnd < time() - 600) {
@@ -88,5 +85,12 @@ class RpcService
     private function md5($k, $v)
     {
         return md5(md5($k) . md5($v));
+    }
+
+    // 统一签名
+    public function get_sign($rnd)
+    {
+        $sign=$this->md5($this->md5($this->topic, $this->key), $rnd);
+        return $rnd.'_'.$sign;
     }
 }
