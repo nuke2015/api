@@ -21,22 +21,38 @@ class CacheRedis extends MyRedis
     }
 
     /**
-     * 保存
+     * 保存,缓存默认2个月过期.
+     * 如果进行了两次set操作,则expire周期会被刷新,此处使用应谨慎.
      * @param [type]  $key    [description]
      * @param [type]  $value  [description]
      * @param integer $expire [description]
      */
-    public static function set($key, $value, $expire = 0)
+    public static function set($key, $value, $expire = 5184000)
     {
         $key   = self::modify_key($key);
         $redis = self::conn();
-        $value = serialize($value);
-        if ($expire > 0) {
-            $status = $redis->setex($key, $expire, $value);
+        if ($expire <= 0) {
+            // 马上过期
+            $status = $redis->delete($key);
         } else {
-            $status = $redis->set($key, $value);
+            // 缓存一定会过期,不是持久存储
+            $value  = serialize($value);
+            $status = $redis->setex($key, $expire, $value);
         }
         return $status;
+    }
+
+    // 自增锁,因为不能serialize,所以,与其它的get,set操作不能共用!
+    public static function setinc($key, $value, $expire = 86400)
+    {
+        $check = self::isExists($key);
+        if ($check) {
+            $n=self::get($key);
+            self::set($key,$n+$value);
+        } else {
+            self::set($key, $value);
+        }
+        return self::get($key);
     }
 
     // 单独设置list的过期时间
@@ -138,6 +154,14 @@ class CacheRedis extends MyRedis
         return $redis->LRANGE($key, $start, $stop);
     }
 
+    // 删除队列
+    public static function lrem($value)
+    {
+        $key   = self::modify_key(self::$quene_key);
+        $redis = self::conn();
+        return $redis->lrem($key, $value);
+    }
+
     /**
      * 修剪现有列表
      */
@@ -164,9 +188,12 @@ class CacheRedis extends MyRedis
      * 判断key是否存在
      * @param string $key KEY名称
      */
-    public static function isExists()
+    public static function isExists($key = '')
     {
-        $key   = self::modify_key(self::$quene_key);
+        if (!$key) {
+            $key = self::$quene_key;
+        }
+        $key   = self::modify_key($key);
         $redis = self::conn();
         return $redis->exists($key);
     }
@@ -179,5 +206,4 @@ class CacheRedis extends MyRedis
         $redis = self::conn();
         return $redis->keys('*');
     }
-
 }

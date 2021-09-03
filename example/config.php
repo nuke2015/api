@@ -26,4 +26,8 @@ $myconfig = [
         'REDIS_PWD'  => '123456',
     ],
 ];
+
+defined('RUNTIME_PATH') or define('RUNTIME_PATH', '/tmp/');
+defined('CACHE_PATH') or define('CACHE_PATH', '/tmp/');
+
 think\Config::set($myconfig);

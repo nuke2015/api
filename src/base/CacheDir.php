@@ -1,46 +1,68 @@
 <?php
+
 namespace nuke2015\api\base;
 
-// 按目录文件缓存
+// 按目录文件缓存,唯独这个不区分module_name避免重复缓存
 class CacheDir
 {
-    public static function connect($dir = '', $expire = 86400)
+    // 静态变量
+    public static $Tfilecache;
+
+    public static function connect($dir = 'default', $expire = 86400)
     {
-        if (!$dir) {
-            $dir = MODULE_NAME;
+        $dir = CACHE_PATH . '/' . $dir . '/';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777);
         }
-        // 单机文件式缓存
-        $options = [
-            'type'   => 'File',
-            'path'   => CACHE_PATH . "/{$dir}/",
-            'prefix' => '',
-            'expire' => $expire,
-        ];
-        $cache = \think\Cache::connect($options);
-        return $cache;
+
+        if (!self::$Tfilecache) {
+            self::$Tfilecache = new Tfilecache();
+        }
+
+        self::$Tfilecache::$dir_store = $dir;
+        return self::$Tfilecache;
     }
 
-    public static function set($key, $value, $expire = 0)
+    // 设置
+    public static function set($key, $value, $expire = 86400)
     {
         $cache = self::connect();
         return $cache->set($key, $value, $expire);
     }
 
+    // 取出
     public static function get($key)
     {
         $cache = self::connect();
         return $cache->get($key);
     }
 
+    // 单键删除
     public static function rm($key)
     {
         $cache = self::connect();
-        return $cache->rm($key);
+        return $cache->remove($key);
     }
 
-    public static function clear()
+    // 别名,兼容
+    public static function remove($key)
     {
-        $cache = self::connect();
-        return $cache->clear();
+        return self::rm($key);
+    }
+
+    // 整个清除
+    public static function clear($dir = 'default')
+    {
+        $dir = CACHE_PATH . '/' . $dir . '/';
+        if ($dir && is_dir($dir)) {
+            $files = glob($dir . '*');
+            if ($files && count($files)) {
+                foreach ($files as $key => $file) {
+                    if (file_exists($file)) {
+                        unlink($file);
+                    }
+                }
+            }
+        }
     }
 }
