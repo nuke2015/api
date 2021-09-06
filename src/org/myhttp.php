@@ -224,7 +224,7 @@ class myhttp
     }
 
     // curl -F发送文件,注意超时影响;
-    // $file = '/www/php/site/sdf.png';
+    // $file = '/www/php/site/demo.png';
     // $req = ['description' => 'demo', 'media' => new \CURLFile($file)];
     public function sendfile($url, $data = '', $method = 'POST')
     {

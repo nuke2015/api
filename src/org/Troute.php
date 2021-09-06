@@ -4,7 +4,7 @@ namespace nuke2015\api\org;
 
 // 兼容路由
 // php index.php "/a/baiduLiandao/?a=1&b=2&c=3"
-// http://chrome.loc.qinqinyuesao.com/a/baiduLiandao/?a=1&b=2&c=3
+// http://chrome.loc.example.com/a/baiduLiandao/?a=1&b=2&c=3
 class Troute
 {
     // 把cli时的argv附加参数转化为标准的$_request变量.
@@ -32,7 +32,7 @@ class Troute
     }
 
     // 软路由
-    // 浏览器:http://crontab.loc.qinqinyuesao.com/index.php?s=/a/b/c/d.html
+    // 浏览器:http://crontab.loc.example.com/index.php?s=/a/b/c/d.html
     // 命令行 php crontab_cube.php "/a/b/c/d.html"
     public static function route_seo()
     {

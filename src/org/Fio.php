@@ -4,7 +4,7 @@ namespace nuke2015\api\org;
 
 use Exception;
 
-// $url  = 'http://video.com/gaogainaiyansudabingganA.mp4';
+// $url  = 'http://video.example.com/gaogainaiyansudabingganA.mp4';
 // $file = "test.mp4";
 // Fio::stream_to_stream($url, $file);
 

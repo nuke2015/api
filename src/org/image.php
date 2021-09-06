@@ -12,7 +12,7 @@ class image
     // 远程logo本地化
     public static function remote_to_loacl($logo, $dir = 'zhihu_club')
     {
-        $file = 'zhihu_logo_' . md5($logo) . '.png';
+        $file = 'logo_' . md5($logo) . '.png';
         $dir  = RUNTIME_PATH . $dir;
         if (!is_dir($dir)) {
             mkdir($dir);
