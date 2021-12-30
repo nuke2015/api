@@ -5,7 +5,7 @@ namespace nuke2015\api\org;
 class Tupload
 {
     // 公共上传
-    public static function upload_oss($dir = 'jiajiamuying_upload')
+    public static function upload_oss($dir = 'ijiazhen')
     {
         list($err, $data) = self::upload();
         if (!$err) {
@@ -30,10 +30,8 @@ class Tupload
             // 补充文件扩展名
             $obj = $dir . '/' . date('Ymd') . '/' . time() . uniqid() . '.' . $extension;
             if (file_exists($file['tmp_name'])) {
-                $res = aliyun\myoss::upload_file_by_file('upload-ddys', $file['tmp_name'], $obj);
-                if ($res->isOk()) {
-                    $url_obj = '/' . $obj;
-                }
+                // 阿里云上传
+                $url_obj = OSSHelper::uploadFile($obj, $file['tmp_name']);
                 return array(0, $url_obj);
             } else {
                 return array(1, '请选择要上传的文件!');

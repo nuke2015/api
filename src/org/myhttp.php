@@ -108,7 +108,7 @@ class myhttp
             }
         }
         // 补充头文件
-        if ($header && count($header)) {
+        if (is_array($header) && count($header)) {
             $opts[CURLOPT_HTTPHEADER] = $header;
         }
         if (self::$debug) {

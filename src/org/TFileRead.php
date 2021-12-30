@@ -7,7 +7,7 @@ class TFileRead
     // 做一行
     public static function do_by_line($filename, $func)
     {
-        $fp = new \SplFileObject($filename, 'rb');
+        $fp    = new \SplFileObject($filename, 'rb');
         $total = self::get_lines_count($filename);
         for ($i = 0; $i <= $total; ++$i) {
             $fp->seek($i);
@@ -22,7 +22,7 @@ class TFileRead
     // 找一行
     public static function seek_line($filename, $line_seek, $func)
     {
-        $fp = new \SplFileObject($filename, 'rb');
+        $fp    = new \SplFileObject($filename, 'rb');
         $total = self::get_lines_count($filename);
         for ($i = 0; $i <= $total; ++$i) {
             if ($i == $line_seek) {
@@ -47,11 +47,14 @@ class TFileRead
     public static function get_lines($filename, $startLine = 1, $limitLine = 5, $method = 'rb')
     {
         $content = array();
-        $fp = new \SplFileObject($filename, $method);
+        $fp      = new \SplFileObject($filename, $method);
         $fp->seek($startLine - 1);
         for ($i = 0; $i < $limitLine; ++$i) {
             $line = $fp->current();
-            $content[] = trim($line);
+            if ($line) {
+                $content[] = trim($line);
+            }
+
             $fp->next();
         }
 
@@ -62,7 +65,7 @@ class TFileRead
     public static function get_lines_count($filename)
     {
         $count = 0;
-        $file = new \SplFileObject($filename, 'r');
+        $file  = new \SplFileObject($filename, 'r');
         $file->seek(PHP_INT_MAX);
         $count = $file->key();
 
@@ -76,7 +79,9 @@ class TFileRead
         if ($size > $count) {
             $size = $count;
         }
-        $r = rand(1, $count - $size);
+        // 从第一行开始
+        $r = rand(1, $count - $size) + 1;
+        // var_dump($r, $size);
         $data = self::get_lines($file, $r, $size);
         return [$data, $r];
     }

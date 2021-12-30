@@ -19,6 +19,13 @@ class Fio
         self::pipe_streams(fopen($url, 'r'), fopen($file, 'w'));
     }
 
+    // 非字节流,只适合小图片,手动下载
+    public static function file_get($url, $file)
+    {
+        file_put_contents($file, file_get_contents($url));
+        return 1;
+    }
+
     // io流
     public static function pipe_streams($in, $out)
     {
@@ -33,22 +40,18 @@ class Fio
     // 下载文件.
     public static function download($path, $filename = '')
     {
-        header('Content-type:text/html;charset=utf-8');
-        //用以解决中文不能显示出来的问题
-        // $file_name = iconv('utf-8', 'gb2312', $filename);
-        $pathinfo = pathinfo($path);
-        $file_name = empty($filename) ? $pathinfo['basename'] : $filename;
-
+        if (!$filename) {
+            $filename = basename($path);
+        }
         //判断给定的文件存在与否
         if (!file_exists($path)) {
             throw new \Exception('文件不存在!');
         }
-        $fp = fopen($path, 'r');
         $file_size = filesize($path);
         header('Content-type: application/octet-stream');
         header('Accept-Ranges: bytes');
-        header('Accept-Length:'.$file_size);
-        header('Content-Disposition: attachment; filename='.$file_name);
+        header('Accept-Length:' . $file_size);
+        header('Content-Disposition: attachment; filename=' . $filename);
         // header("X-Sendfile: $path");
         readfile($path);
     }

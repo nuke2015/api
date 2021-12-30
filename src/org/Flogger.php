@@ -10,6 +10,16 @@ class Flogger
     public static $log_data = array();
 
     //登记
+    public static function flush()
+    {
+        if (ob_get_level() > 0) {
+            ob_flush();
+        }
+        flush();
+        return;
+    }
+
+    //登记
     public static function sign($tag)
     {
         self::$log_data[$tag] = microtime(1);
@@ -29,7 +39,7 @@ class Flogger
     //详情
     public static function logs()
     {
-        $result = array();
+        $result                     = array();
         $result['LOGGER_TIME_INIT'] = LOGGER_TIME_INIT * 1000;
         if (self::$log_data && count(self::$log_data)) {
             foreach (self::$log_data as $key => $value) {
@@ -43,15 +53,15 @@ class Flogger
     // 日志记录
     public static function save($title, $logdata, $code, $spent, $client_ip)
     {
-        $insert = array();
-        $insert['group'] = MODULE_NAME;
-        $insert['title'] = $title;
-        $insert['code'] = (int) $code;
-        $insert['ip'] = $client_ip;
+        $insert              = array();
+        $insert['group']     = MODULE_NAME;
+        $insert['title']     = $title;
+        $insert['code']      = (int) $code;
+        $insert['ip']        = $client_ip;
         $insert['useragent'] = UserAgentParse::ua();
-        $insert['spent'] = $spent;
+        $insert['spent']     = $spent;
         $insert['create_at'] = time();
-        $insert['data'] = $logdata;
+        $insert['data']      = $logdata;
 
         return $insert;
     }
@@ -94,9 +104,9 @@ class Flogger
     // 写日志
     public static function write($filename, $txt)
     {
-        $module_name = defined('CUBE_MODULE') ? CUBE_MODULE : 'debug';
+        $module_name  = defined('CUBE_MODULE') ? CUBE_MODULE : 'debug';
         $runtime_path = defined('RUNTIME_PATH') ? RUNTIME_PATH : '/home/ddys_run/';
-        $filename = $runtime_path . '/log/' . $module_name . '_' . $filename . '_' . date('Y_m_d') . '.log';
+        $filename     = $runtime_path . '/log/' . $module_name . '_' . $filename . '_' . date('Y_m_d') . '.log';
         if (defined('MODULE_NAME') && (MODULE_NAME != 'logcenter')) {
             // 避免写两份
             return file_put_contents($filename, $txt, FILE_APPEND);
@@ -114,12 +124,12 @@ class Flogger
     {
         $data_env = array();
 
-        $data_env['url'] = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $data_env['ip'] = myhttp::client_ip();
-        $data_env['time'] = date('Y_m_d H:i:s');
-        $data_env['ua'] = UserAgentParse::ua();
-        $data_env['method'] = $_SERVER['SERVER_PROTOCOL'] . '_' . $_SERVER['REQUEST_METHOD'];
-        $data_env['refer'] = isset($_SERVER['HTTP_REFERER']) ? trim($_SERVER['HTTP_REFERER']) : '';
+        $data_env['url']       = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $data_env['ip']        = myhttp::client_ip();
+        $data_env['time']      = date('Y_m_d H:i:s');
+        $data_env['ua']        = UserAgentParse::ua();
+        $data_env['method']    = $_SERVER['SERVER_PROTOCOL'] . '_' . $_SERVER['REQUEST_METHOD'];
+        $data_env['refer']     = isset($_SERVER['HTTP_REFERER']) ? trim($_SERVER['HTTP_REFERER']) : '';
         $data_env['PHPSESSID'] = isset($_COOKIE['PHPSESSID']) ? trim($_COOKIE['PHPSESSID']) : '';
 
         return $data_env;
