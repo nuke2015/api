@@ -1,5 +1,4 @@
 <?php
-
 namespace nuke2015\api\org;
 
 class Tupload
@@ -53,7 +52,8 @@ class Tupload
         $result = array();
         if ($list && count($list)) {
             foreach ($list as $key => $file) {
-                $fileattach_size_limit = \tp5x\Config::get('fileattach_size_limit');
+                // 最大3m
+                $fileattach_size_limit = 3072000;
                 // 限制10M
                 if ($file && $fileattach_size_limit > 0 && $file['size'] > $fileattach_size_limit) {
                     return [1, 'filesize limit'];

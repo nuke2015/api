@@ -1,5 +1,4 @@
 <?php
-
 namespace nuke2015\api\org;
 
 // 界面辅助翻译
@@ -56,7 +55,7 @@ class uihelper
         if ($_SERVER['HTTP_ACT']) {
             $return = trim($_SERVER['HTTP_ACT']);
         } else {
-            $return = "www.example.com";
+            $return = "www.ijiazhen.com";
         }
         return $return;
     }

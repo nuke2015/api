@@ -6,6 +6,8 @@ namespace nuke2015\api\org;
 define('E_FATAL', E_ERROR | E_USER_ERROR | E_CORE_ERROR |
     E_COMPILE_ERROR | E_RECOVERABLE_ERROR | E_PARSE);
 
+// TError::listen();
+
 // 出错监听
 class TError
 {

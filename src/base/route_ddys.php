@@ -1,7 +1,7 @@
 <?php
 namespace nuke2015\api\base;
 
-use didiyuesao\com\org;
+use nuke2015\api\org;
 
 // 家家月嫂路由中心
 class route_ddys
@@ -34,7 +34,7 @@ class route_ddys
         define('MODULE_NAME', $app);
 
         // 增加个小常量
-        define('CUBE_MODULE', 'didiyuesao_' . $app);
+        define('CUBE_MODULE', 'ijiazhen_' . $app);
 
         // 外部文件拦截
         self::seo_optimize();
@@ -48,15 +48,15 @@ class route_ddys
         // 服务日志
         org\Flogger::json_log('route', ['app' => $app, 'req' => $_REQUEST, 'env' => org\Flogger::env()]);
 
-        // 纯接口
-        if (in_array($app, ['api', 'logcenter', 'yapi', 'saler', 'saler_club', 'api_exam', 'rpc', 'saler', 'yuyingshi', 'api_crm', 'api_union', 'paysystem'])) {
+        // 纯接口,是否gzip
+        if (in_array($app, ['api', 'logcenter', 'yapi', 'saler', 'saler_club', 'api_exam', 'rpc', 'saler', 'yuyingshi', 'api_crm', 'api_union', 'paysystem', 'zhaopin'])) {
             org\header_ddys::json();
             org\header_ddys::gzip();
         }
 
         // 入口初始化
         if (!self::$application) {
-            $ctrl              = "\didiyuesao\app\\$app\controller\Index";
+            $ctrl              = "\ijiazhen\app\\$app\controller\Index";
             self::$application = new $ctrl();
         }
 
@@ -117,7 +117,7 @@ class route_ddys
     // 配置组
     private static function config()
     {
-        $str    = 'news,paysystem,crontab,www,saler,rpc,m,yapi,saler_club,api_exam,yuyingshi,api,api_crm,yuandong_crm,yuandong,zhishi,union,m_union,shop_union,logcenter,api_union,ziyuehuanghou';
+        $str    = 'news,paysystem,crontab,www,saler,rpc,m,yapi,saler_club,api_exam,yuyingshi,api,api_crm,yuandong_crm,yuandong,zhishi,union,m_union,shop_union,logcenter,zhaopin,api_union,ziyuehuanghou';
         $config = explode(',', $str);
         // 先判断长的,否则会不准确!
         arsort($config);

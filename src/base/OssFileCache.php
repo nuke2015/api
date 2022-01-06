@@ -1,7 +1,7 @@
 <?php
 namespace nuke2015\api\base;
 
-use didiyuesao\com\org\aliyun;
+use nuke2015\api\org\aliyun;
 
 // 多机文件读写同步
 class OssFileCache

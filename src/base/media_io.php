@@ -8,7 +8,7 @@ class media_io
     public static function connect($dir)
     {
         // 阿里云runtime
-        $runtime_oss = \think\Config::get('runtime_oss');
+        $runtime_oss = 0;
         if (defined('ENV_ONLINE') && ENV_ONLINE > 0 && $runtime_oss) {
             $media = new OssFileCache(ENV_ONLINE . '_' . $dir);
         } else {

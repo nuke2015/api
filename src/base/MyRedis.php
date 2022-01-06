@@ -2,8 +2,7 @@
 
 namespace nuke2015\api\base;
 
-use think\Config;
-use think\Exception;
+use nuke2015\api\config as dc;
 
 // 原生的php连接组件
 class MyRedis
@@ -21,7 +20,7 @@ class MyRedis
         //原生长链接,单例模式
         if (!self::$redis) {
             self::$redis = new \redis();
-            $options = Config::get('MyCacheRedis');
+            $options = dc\redis::config();
             if (!$options || !is_array($options)) {
                 throw new \Exception('redis no config,yet', 60008);
             }
@@ -42,10 +41,10 @@ class MyRedis
     public static function modify_key($key)
     {
         $env = defined('ENV_ONLINE') ? ENV_ONLINE : 0;
-        $prefix = $env.self::$modify_key;
+        $prefix = $env . self::$modify_key;
 
         // 此处不用md5,可在单一业务的key进行md5,增加多城市区分
-        $key = $prefix.base64_encode($key);
+        $key = $prefix . base64_encode($key);
 
         return $key;
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace nuke2015\api\org;
 
 // 超远程签名,一次失效,避免签名重复使用

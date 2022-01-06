@@ -2,7 +2,7 @@
 
 namespace nuke2015\api\base;
 
-use didiyuesao\com\org;
+use nuke2015\api\org;
 
 class ApiJiazhen extends ApiBaseAction implements InterfaceAction
 {

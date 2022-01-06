@@ -2,7 +2,7 @@
 
 namespace nuke2015\api\base;
 
-use didiyuesao\com\config;
+use nuke2015\api\config;
 
 class MongoDB
 {

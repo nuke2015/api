@@ -12,6 +12,7 @@ class year
         if ($timestamp) {
             $result = date('Y') - date('Y', $timestamp);
         }
-        return $result;
+        // 解决0岁问题
+        return $result+1;
     }
 }

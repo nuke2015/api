@@ -5,6 +5,7 @@ namespace nuke2015\api\org;
 // 文件夹日志查看
 class LoggerViewer
 {
+    static $path = '/home/ddys_run/cube/log';
 
     // 日期
     public function day_list()
@@ -23,7 +24,7 @@ class LoggerViewer
     public function filelist($keyword = '', $page = 1, $size = 50)
     {
         // glob不支持大小写
-        $path    = '/home/ddys_run/cube/log';
+        $path    = self::$path;
         $keyword = $this->keyword_scan($keyword);
         chdir($path);
         $cmd_total = "ls|" . $keyword;
@@ -63,8 +64,9 @@ class LoggerViewer
     // 文件名校验
     public function file_check($file)
     {
-        $path = '/home/ddys_run/cube/log/';
-        $list = glob($path . $file);
+        $path = self::$path;
+        $file = $path . '/' . $file;
+        $list = glob($file);
 
         return $list;
     }

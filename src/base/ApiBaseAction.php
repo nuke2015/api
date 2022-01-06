@@ -2,12 +2,16 @@
 
 namespace nuke2015\api\base;
 
-use didiyuesao\com\org;
+use nuke2015\api\org;
 
 // 全站基类
 class ApiBaseAction
 {
     use ApiDataListAction;
+    use CURDAction;
+
+    //curd
+    protected static $db = 'ijiazhen\\com\\model\\';
 
     // 常规日志
     protected static function log($filename, $data)

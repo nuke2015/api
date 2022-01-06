@@ -1,5 +1,4 @@
 <?php
-
 namespace nuke2015\api\org;
 
 // 接口版本路由
@@ -44,9 +43,9 @@ class Tversion
         } else {
             if ($str) {
                 // 兼容https模式
-                // $str = "https://www.example.com/upload/" . $str;
+                // $str = "https://www.ijiazhen.com/upload/" . $str;
                 // http官方外链
-                $str = "http://upload.example.com/" . $str;
+                $str = "http://upload.ijiazhen.com/" . $str;
             } else {
                 $str = '';
             }
