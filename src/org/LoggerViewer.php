@@ -34,7 +34,7 @@ class LoggerViewer
         $start = ($page - 1) * $size;
         $list  = array_slice($list, $start, $size);
 
-        return [0, ['total' => $total, 'cmd' => $cmd_total, 'count' => count($list), 'data' => $list]];
+        return [0, ['total' => $total, 'cmd' => $cmd_total, 'page' => $page, 'size' => $size, 'count' => count($list), 'data' => $list]];
     }
 
     // 关键词拆分
@@ -135,7 +135,7 @@ class LoggerViewer
                     }
                 }
             }
-            return [0, ['total' => $total, 'cmd' => $cmd, 'count' => count($result), 'data' => $result]];
+            return [0, ['total' => $total, 'cmd' => $cmd, 'page' => $page, 'size' => $size, 'count' => count($result), 'data' => $result]];
         } else {
             return [1, 'file not found!'];
         }
