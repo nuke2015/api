@@ -11,7 +11,7 @@ class ApiBaseAction
     use CURDAction;
 
     //curd
-    protected static $db = 'ijiazhen\\com\\model\\';
+    protected static $db = 'nuke2015\\api\\model\\';
 
     // 常规日志
     protected static function log($filename, $data)
