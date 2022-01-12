@@ -55,7 +55,7 @@ class Tcurl
     // 内存调用性能好,但架构不如socket纯粹
     public static function namesapce_call($app, $param)
     {
-        $ctrl = "\ijiazhen\app\\$app\controller\Index";
+        $ctrl = "\didiyuesao\app\\$app\controller\Index";
         $api  = new $ctrl();
         return $api->index($param);
     }

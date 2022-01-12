@@ -1,4 +1,6 @@
 <?php
+namespace nuke2015\api\org;
+
 /**
  * Geohash generation class for php
  *

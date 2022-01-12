@@ -34,7 +34,7 @@ class route_ddys
         define('MODULE_NAME', $app);
 
         // 增加个小常量
-        define('CUBE_MODULE', 'ijiazhen_' . $app);
+        define('CUBE_MODULE', 'didiyuesao_' . $app);
 
         // 外部文件拦截
         self::seo_optimize();
@@ -56,7 +56,7 @@ class route_ddys
 
         // 入口初始化
         if (!self::$application) {
-            $ctrl              = "\ijiazhen\app\\$app\controller\Index";
+            $ctrl              = "\didiyuesao\app\\$app\controller\Index";
             self::$application = new $ctrl();
         }
 

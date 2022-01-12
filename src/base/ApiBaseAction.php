@@ -3,6 +3,7 @@
 namespace nuke2015\api\base;
 
 use nuke2015\api\org;
+use nuke2015\api\config;
 
 // 全站基类
 class ApiBaseAction
@@ -29,7 +30,7 @@ class ApiBaseAction
     // 微信公众号网关
     protected static function host_weixin($is_https = 0)
     {
-        return org\config::host_weixin($is_https);
+        return config::host_weixin($is_https);
     }
 
     // 缓存读取

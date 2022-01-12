@@ -4,7 +4,7 @@ namespace nuke2015\api\org;
 class Tupload
 {
     // 公共上传
-    public static function upload_oss($dir = 'ijiazhen')
+    public static function upload_oss($dir = 'jiajiamuying_upload')
     {
         list($err, $data) = self::upload();
         if (!$err) {

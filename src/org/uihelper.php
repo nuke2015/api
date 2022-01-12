@@ -55,7 +55,7 @@ class uihelper
         if ($_SERVER['HTTP_ACT']) {
             $return = trim($_SERVER['HTTP_ACT']);
         } else {
-            $return = "www.ijiazhen.com";
+            $return = "www.jjys168.com";
         }
         return $return;
     }

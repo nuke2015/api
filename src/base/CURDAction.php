@@ -6,7 +6,7 @@ use nuke2015\api\org;
 
 trait CURDAction
 {
-    // protected static $db = 'ijiazhen\\com\\model\\';
+    // protected static $db = 'didiyuesao\\com\\model\\';
 
     // 参数标准化
     protected function _param($p = [])

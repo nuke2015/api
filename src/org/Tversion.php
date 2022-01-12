@@ -43,9 +43,9 @@ class Tversion
         } else {
             if ($str) {
                 // 兼容https模式
-                // $str = "https://www.ijiazhen.com/upload/" . $str;
+                // $str = "https://www.jjys168.com/upload/" . $str;
                 // http官方外链
-                $str = "http://upload.ijiazhen.com/" . $str;
+                $str = "http://upload.jjys168.com/" . $str;
             } else {
                 $str = '';
             }

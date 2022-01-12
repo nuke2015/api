@@ -2,8 +2,8 @@
 
 namespace nuke2015\api\mongo;
 
-use didiyuesao\com\base;
-use didiyuesao\com\config;
+use nuke2015\api\base;
+use nuke2015\api\config;
 
 abstract class MongoBase extends base\mongodb
 {

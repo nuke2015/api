@@ -42,7 +42,8 @@ class TError
                 var_dump($e);
                 exit;
             } else {
-                exit(MODULE_NAME.' exception:'.$e['file'].'#'.$e['line']);
+                $MODULE_NAME = defined('MODULE_NAME') ? MODULE_NAME : 'default';
+                exit($MODULE_NAME . ' error:' . $e['file'] . '#' . $e['line']);
             }
         }
     }
@@ -59,7 +60,8 @@ class TError
                 var_dump($e);
                 exit;
             } else {
-                exit(MODULE_NAME.' error:'.$e['file'].'#'.$e['line']);
+                $MODULE_NAME = defined('MODULE_NAME') ? MODULE_NAME : 'default';
+                exit($MODULE_NAME . ' error:' . $e['file'] . '#' . $e['line']);
             }
         }
     }

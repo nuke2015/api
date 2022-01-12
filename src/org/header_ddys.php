@@ -8,8 +8,8 @@ class header_ddys
     public static function html()
     {
         @header('Content-type:text/html;charset=utf-8');
-        @header('Server:ijiazhen.com');
-        @header('X-Powered-By:ijiazhen.com');
+        @header('Server:jjys168.com');
+        @header('X-Powered-By:jjys168.com');
         return;
     }
 
@@ -18,11 +18,9 @@ class header_ddys
     {
         @header('Access-Control-Allow-Origin: *');
         // 禁用cookie,分布式架构
-        @header('Access-Control-Allow-Credentials:true');
+        @header('Access-Control-Allow-Credentials:false');
         @header('Content-type:application/json;charset=utf-8');
-        // 授权
-        @header('Server:ijiazhen.com');
-        @header('X-Powered-By:ijiazhen.com');
+
         // ajax
         @header('Access-Control-Allow-Methods:OPTIONS, GET, POST'); // 允许option，get，post请求
         @header('Access-Control-Allow-Headers:x-requested-with'); // 允许x-requested-with请求头
