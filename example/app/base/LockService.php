@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+
 use nuke2015\api\base;
 
 // view-source:http://com.loc.jjys168.com/example/LockService.php

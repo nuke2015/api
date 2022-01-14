@@ -1,6 +1,4 @@
 <?php
-require 'config.php';
-
 use \nuke2015\api\service;
 
 $topic = 'zhihu';

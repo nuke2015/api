@@ -82,7 +82,7 @@ class CacheRedis extends MyRedis
     {
         $key   = self::modify_key($key);
         $redis = self::conn();
-        return $redis->delete($key);
+        return $redis->del($key);
     }
 
     // 大仓储存入

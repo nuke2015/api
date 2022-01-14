@@ -8,11 +8,11 @@ class year
     public static function age($str)
     {
         $timestamp = strtotime($str);
-        $result    = '';
+        $result    = 0;
         if ($timestamp) {
             $result = date('Y') - date('Y', $timestamp);
         }
         // 解决0岁问题
-        return $result+1;
+        return $result + 1;
     }
 }
