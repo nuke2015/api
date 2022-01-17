@@ -8,12 +8,12 @@ class ueditor
     public static function config()
     {
         $ueditorDir = __DIR__ . "/ueditor/";
-        $config     = json_decode(self::config(), 1);
+        $config     = json_decode(self::json(), 1);
         return $config;
     }
 
     // 配置
-    public static function config()
+    public static function json()
     {
         $json = <<<doc
 {
