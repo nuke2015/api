@@ -29,4 +29,17 @@ class image
         }
         return $file;
     }
+
+    // 创建示例图片
+    public static function image_demo($txt, $x, $y, $show = 1)
+    {
+        $im  = imagecreatetruecolor($x, $y);
+        $red = imagecolorallocate($im, 255, 0, 0);
+        imagestring($im, 5, $x / 2.5, $y / 2, $txt, $red);
+        if ($show) {
+            header("content-type: image/png");
+        }
+        imagepng($im);
+        imagedestroy($im);
+    }
 }

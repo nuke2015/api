@@ -9,12 +9,14 @@ use Endroid\QrCode\QrCode;
 class QrcodeE
 {
     // 在线显示
-    public static function show($turl, $header = 1,$logo=ROOT_PATH . '/ijiazhen/com/config/image/logo.png')
+    public static function show($turl, $header = 1, $logo = ROOT_PATH . '/ijiazhen/com/config/image/logo.png')
     {
         $qrCode = new QrCode($turl);
         $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::MEDIUM);
-        
-        $qrCode->setLogoPath($logo)->setLogoWidth(50);
+
+        if (file_exists($logo)) {
+            $qrCode->setLogoPath($logo)->setLogoWidth(50);
+        }
 
         $qrCode->setSize(200);
         if ($header) {

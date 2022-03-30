@@ -1,14 +1,18 @@
 <?php
+
 namespace nuke2015\api\org;
 
 // 后台管理员登陆助手
 class crm_helper
 {
 
-    //  $config = [
-    //     'url_api'  => '',
-    //     'url_jump' => '',
-    // ];
+    static $config = [
+        'url_api'  => 'https://api.ijiazhen.com/',
+        'url_jump' => '#',
+        'title' => '管理后台入口',
+        'image' => '/static/images/login-bg.jpg',
+    ];
+
     public static function check_login($config)
     {
         // 首次登陆
@@ -36,19 +40,23 @@ class crm_helper
     // 显示微信登陆码
     public static function show_login_code($config)
     {
+        // 兼容旧版本
+        $config = array_merge(self::$config, $config);
+
         echo <<<doc
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>管理员登陆入口</title>
+        <title>{$config['title']}</title>
         <script src="https://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body
-        style="width: 100%; background-color: rgb(140, 197, 255); background-image: url(/Public/union/login-bg.jpg); background-repeat: no-repeat; background-size: cover;">
+        style="width: 100%; background-color: rgb(140, 197, 255); background-image: url({$config['image']}); background-repeat: no-repeat; background-size: cover;">
         <center>
             <div class="code">
-                <h1>请用微信扫码登陆!</h1>
+                <h1>{$config['title']}</h1>
+                <h4>请用微信扫码登陆!</h4>
                 <img src="#" id="qrcode" alt="" style="width:215px;height:215px;">
             </div>
         </center>
